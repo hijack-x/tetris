@@ -71,9 +71,9 @@ int                         tmpScore = 0;                       // Score of curr
 BLOCK                       ref;                                // Reference of current block
 int                         rowMoved;                           // Row moved
 int                         colMoved;                           // Col moved
-BLOCK                       curSubBlock[MAX_SUB_BLOCK];         // curSubBlock[0]~curSubBlock[MAX_SUB_BLOCK] store the each sub block's position of current block
-BLOCK                       tmpSubBlock[MAX_SUB_BLOCK];         // Used for detect block can tranform
-BLOCK                       nextSubBlock[MAX_SUB_BLOCK];        // nextSubBlock[0]~nextSubBlock[MAX_SUB_BLOCK] store the reference position of the next block
+BLOCK                       curSubBlock[MAX_SUB_BLOCK];         // Store the each sub block's position of current block
+BLOCK                       tmpSubBlock[MAX_SUB_BLOCK];         // Use for detect block can tranform
+BLOCK                       nextSubBlock[MAX_SUB_BLOCK];        // Store the reference position of the next block
 
 #define MAX_LOADSTRING      100
 
@@ -144,7 +144,10 @@ void CenterInParent(HWND parent, HWND child)
     RECT rect1, rect2;
     GetWindowRect(parent, &rect1);
     GetWindowRect(child, &rect2);
-    SetWindowPos(child, HWND_TOPMOST, (rect1.right + rect1.left) / 2 - (rect2.right - rect2.left) / 2, (rect1.bottom + rect1.top) / 2 - (rect2.bottom - rect2.top) / 2, 0, 0, SWP_NOSIZE);
+    SetWindowPos(child, HWND_TOPMOST, 
+        (rect1.right + rect1.left) / 2 - (rect2.right - rect2.left) / 2,
+        (rect1.bottom + rect1.top) / 2 - (rect2.bottom - rect2.top) / 2,
+        0, 0, SWP_NOSIZE);
 }
 
 void MoveToLeft()
