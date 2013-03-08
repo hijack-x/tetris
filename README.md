@@ -27,4 +27,4 @@ Keyboard Settings
 
 Screenshot
 ====
-![Tetris Screenshot](https://github.com/lixianlin/tetris/raw/master/screenshot.png)
+![Tetris Screenshot](https://raw.github.com/lixianlin/tetris/master/screenshot.png)
