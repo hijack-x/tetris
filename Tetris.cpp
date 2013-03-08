@@ -399,7 +399,8 @@ void ShowGameNext(void)
             continue;
         }
         TextureBrush tBrush(&image, Rect(nextBlock * IMAGE_SIZE, 0, IMAGE_SIZE, IMAGE_SIZE));
-        bmpGraphics.FillRectangle(&tBrush, nextSubBlock[i].col * IMAGE_SIZE, nextSubBlock[i].row * IMAGE_SIZE, IMAGE_SIZE, IMAGE_SIZE);
+        bmpGraphics.FillRectangle(&tBrush,
+            nextSubBlock[i].col * IMAGE_SIZE, nextSubBlock[i].row * IMAGE_SIZE, IMAGE_SIZE, IMAGE_SIZE);
     }
     HDC hdc = GetDC(hWndMain);
     Graphics graphics(hdc);
