@@ -82,6 +82,7 @@ TCHAR                       szTitle[MAX_LOADSTRING];
 TCHAR                       szWindowClass[MAX_LOADSTRING];
 HWND                        hWndMain;
 HWND                        hWndCMI;
+Image                       *image = NULL;
 
 // Foward declarations of functions included in this code module:
 ATOM                        MyRegisterClass(HINSTANCE hInstance);

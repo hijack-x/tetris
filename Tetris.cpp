@@ -41,6 +41,8 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstanc
     ULONG_PTR gdiplusToken;
     GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
 
+    image = new Image(L"Res\\Image.jpg");
+
     // Initialize global strings
     LoadString(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadString(hInstance, IDC_TETRIS, szWindowClass, MAX_LOADSTRING);
@@ -61,6 +63,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstanc
         }
     }
 
+    delete image;
     // Shutdown GDI+
     GdiplusShutdown(gdiplusToken);
 
@@ -336,22 +339,22 @@ void ShowGameView(void)
     }
 
     // draw image
-    Image image(L"Res\\Image.jpg");
     for (int i = HIDE_ROW; i < ROW; i++) {
         for (int j = 0; j < COL; ++j) {
             if (container[i][j] == EMPTY_BLOCK) { // empty block
                 continue;
             }
-            TextureBrush tBrush(&image, Rect(container[i][j] * IMAGE_SIZE, 0, IMAGE_SIZE, IMAGE_SIZE));
+            TextureBrush tBrush(image, Rect(container[i][j] * IMAGE_SIZE, 0, IMAGE_SIZE, IMAGE_SIZE));
             bmpGraphics.FillRectangle(&tBrush, j * IMAGE_SIZE, (i - HIDE_ROW) * IMAGE_SIZE, IMAGE_SIZE, IMAGE_SIZE);
         }
     }
 
+    // draw block
     for (int i = 0; i < MAX_SUB_BLOCK; ++i) {
         if (curSubBlock[i].row != INVALID_OFFSET) {
             int row = curSubBlock[i].row + rowMoved;
             int col = curSubBlock[i].col + colMoved;
-            TextureBrush tBrush(&image, Rect(curBlock * IMAGE_SIZE, 0, IMAGE_SIZE, IMAGE_SIZE));
+            TextureBrush tBrush(image, Rect(curBlock * IMAGE_SIZE, 0, IMAGE_SIZE, IMAGE_SIZE));
             bmpGraphics.FillRectangle(&tBrush, col * IMAGE_SIZE, (row - HIDE_ROW) * IMAGE_SIZE, IMAGE_SIZE, IMAGE_SIZE);
         }
     }
@@ -393,15 +396,17 @@ void ShowGameNext(void)
         }
     }
 
-    Image image(L"Res\\Image.jpg");
+    // draw block
     for (int i = 0; i < MAX_SUB_BLOCK; i++) {
         if (nextSubBlock[i].row == INVALID_OFFSET) {
             continue;
         }
-        TextureBrush tBrush(&image, Rect(nextBlock * IMAGE_SIZE, 0, IMAGE_SIZE, IMAGE_SIZE));
+        TextureBrush tBrush(image, Rect(nextBlock * IMAGE_SIZE, 0, IMAGE_SIZE, IMAGE_SIZE));
         bmpGraphics.FillRectangle(&tBrush,
             nextSubBlock[i].col * IMAGE_SIZE, nextSubBlock[i].row * IMAGE_SIZE, IMAGE_SIZE, IMAGE_SIZE);
     }
+
+    // draw cache bitmap
     HDC hdc = GetDC(hWndMain);
     Graphics graphics(hdc);
     CachedBitmap cachedBmp(&bmp, &graphics);
