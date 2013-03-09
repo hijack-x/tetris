@@ -1,11 +1,19 @@
 Tetris
-====
-
+===
 A 2D tetris game written in C++
 
-Keyboard Settings
-====
+Screenshot
+===
+![Tetris Screenshot](https://raw.github.com/lixianlin/tetris/master/screenshot.png)
 
+Usage
+===
+``Tetris.exe <ROW> <COL> <FPS>``
+
+``When no arguments specified, the default is "Tetris.exe 20 10 30"``
+
+Keyboard Settings
+===
 ``← = Move To Left``
 ``→ = Move To Right``
 ``↓ = Move To Down``
@@ -24,7 +32,3 @@ Keyboard Settings
 
 ``F9 = Exit``
 ``F12 = About``
-
-Screenshot
-====
-![Tetris Screenshot](https://raw.github.com/lixianlin/tetris/master/screenshot.png)
